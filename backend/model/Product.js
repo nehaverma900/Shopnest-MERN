@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      min: 0,
     },
 
     category: {
@@ -26,6 +27,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
       default: 1,
+      min: 0,
     },
 
     images: [
@@ -38,6 +40,7 @@ const productSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
   },
   {
