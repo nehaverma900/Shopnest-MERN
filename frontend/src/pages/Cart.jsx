@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Cart() {
   const navigate = useNavigate();
 
@@ -38,7 +41,7 @@ function Cart() {
               <img
                 src={
                   product.images && product.images.length > 0
-                    ? `http://localhost:5000${product.images[0].url}`
+                    ? `${API_URL}${product.images[0].url}`
                     : "https://via.placeholder.com/120"
                 }
                 alt={product.name}

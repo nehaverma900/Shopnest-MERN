@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Orders() {
   const [orders, setOrders] = useState([]);
 
@@ -13,7 +16,7 @@ function Orders() {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/orders/myorders",
+        `${API_URL}/api/orders/myorders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

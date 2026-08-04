@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function ProductDetails() {
   const { id } = useParams();
 
@@ -14,12 +17,12 @@ function ProductDetails() {
   const fetchProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/products/${id}`
+        `${API_URL}/api/products/${id}`
       );
 
       setProduct(data.product);
     } catch (error) {
-      console.log(error);
+      console.log("Product Fetch Error:", error);
     }
   };
 
@@ -29,7 +32,7 @@ function ProductDetails() {
 
   const image =
     product.images && product.images.length > 0
-      ? `http://localhost:5000${product.images[0].url}`
+      ? `${API_URL}${product.images[0].url}`
       : "https://via.placeholder.com/350";
 
   return (
@@ -49,9 +52,13 @@ function ProductDetails() {
 
       <p>{product.description}</p>
 
-      <p><b>Category:</b> {product.category}</p>
+      <p>
+        <b>Category:</b> {product.category}
+      </p>
 
-      <p><b>Stock:</b> {product.stock}</p>
+      <p>
+        <b>Stock:</b> {product.stock}
+      </p>
 
       <button>Add To Cart</button>
     </div>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
 
@@ -13,7 +16,7 @@ function AdminOrders() {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/orders",
+        `${API_URL}/api/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,7 +36,7 @@ function AdminOrders() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/orders/${id}`,
+        `${API_URL}/api/orders/${id}`,
         {
           orderStatus: status,
         },
@@ -59,7 +62,7 @@ function AdminOrders() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/api/orders/${id}`,
+        `${API_URL}/api/orders/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,21 +97,10 @@ function AdminOrders() {
           >
             <h3>User Details</h3>
 
-            <p>
-              <strong>Name:</strong> {order.user?.name}
-            </p>
-
-            <p>
-              <strong>Email:</strong> {order.user?.email}
-            </p>
-
-            <p>
-              <strong>Total Price:</strong> ₹{order.totalPrice}
-            </p>
-
-            <p>
-              <strong>Status:</strong> {order.orderStatus}
-            </p>
+            <p><strong>Name:</strong> {order.user?.name}</p>
+            <p><strong>Email:</strong> {order.user?.email}</p>
+            <p><strong>Total Price:</strong> ₹{order.totalPrice}</p>
+            <p><strong>Status:</strong> {order.orderStatus}</p>
 
             <h4>Products</h4>
 
@@ -154,3 +146,4 @@ function AdminOrders() {
 }
 
 export default AdminOrders;
+

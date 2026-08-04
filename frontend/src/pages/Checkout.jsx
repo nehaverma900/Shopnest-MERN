@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "../context/CartContext";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Checkout() {
   const navigate = useNavigate();
   const { cart, clearCart } = useContext(CartContext);
@@ -42,7 +45,7 @@ function Checkout() {
       }));
 
       const response = await axios.post(
-        "http://localhost:5000/api/orders/create",
+        `${API_URL}/api/orders/create`,
         {
           orderItems,
           totalPrice,
@@ -112,31 +115,4 @@ function Checkout() {
         placeholder="Shipping Address"
         rows="4"
         value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "10px",
-          marginBottom: "20px",
-        }}
-      />
-
-      <button
-        onClick={handlePlaceOrder}
-        style={{
-          width: "100%",
-          padding: "12px",
-          backgroundColor: "#28a745",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-          fontSize: "16px",
-        }}
-      >
-        Place Order
-      </button>
-    </div>
-  );
-}
-
-export default Checkout;
+        onChange={(e) => setAddress(e

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Home() {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
@@ -13,25 +15,21 @@ function Home() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/products"
+        `${API_URL}/api/products`
       );
 
       setProducts(response.data.products || []);
-
     } catch (error) {
       console.log("Product Fetch Error:", error);
     }
   };
 
   const filteredProducts = products.filter((product) =>
-    product.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    product.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div style={{ padding: "20px" }}>
-
       <h1>Latest Products</h1>
 
       <input
@@ -45,19 +43,17 @@ function Home() {
           marginBottom: "20px",
           fontSize: "16px",
           borderRadius: "5px",
-          border: "1px solid gray"
+          border: "1px solid gray",
         }}
       />
-
 
       <div
         style={{
           display: "flex",
           gap: "20px",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
-
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard
@@ -68,9 +64,7 @@ function Home() {
         ) : (
           <h3>No Products Found</h3>
         )}
-
       </div>
-
     </div>
   );
 }

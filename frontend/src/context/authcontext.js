@@ -3,11 +3,12 @@ import axios from "axios";
 
 const AuthContext = createContext();
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com/api";
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const API_URL = "http://localhost:5000/api";
 
   const checkAuth = async () => {
     try {
