@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
-// 👇 Apna Render Backend URL
 const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
 
 function Cart() {
@@ -28,52 +27,55 @@ function Cart() {
         <h2>Your Cart is Empty</h2>
       ) : (
         <>
-          {cart.map((product) => (
-            <div
-              key={product._id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "15px",
-                marginBottom: "15px",
-                borderRadius: "10px",
-              }}
-            >
-              <img
-                src={
-                  product.images && product.images.length > 0
-                    ? `${API_URL}${product.images[0].url}`
-                    : "https://via.placeholder.com/120"
-                }
-                alt={product.name}
-                width="120"
-                height="120"
-              />
+          {cart.map((product) => {
+            const image =
+              product.images?.length > 0
+                ? `${API_URL}${product.images[0].url}`
+                : "https://via.placeholder.com/120";
 
-              <h3>{product.name}</h3>
-
-              <p>Price: ₹{product.price}</p>
-
-              <h4>Quantity: {product.quantity}</h4>
-
-              <button onClick={() => decreaseQuantity(product._id)}>
-                ➖
-              </button>
-
-              <button
-                onClick={() => increaseQuantity(product._id)}
-                style={{ margin: "0 10px" }}
+            return (
+              <div
+                key={product._id}
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "15px",
+                  marginBottom: "15px",
+                  borderRadius: "10px",
+                }}
               >
-                ➕
-              </button>
+                <img
+                  src={image}
+                  alt={product.name}
+                  width="120"
+                  height="120"
+                />
 
-              <br />
-              <br />
+                <h3>{product.name}</h3>
 
-              <button onClick={() => removeFromCart(product._id)}>
-                Remove
-              </button>
-            </div>
-          ))}
+                <p>Price: ₹{product.price}</p>
+
+                <h4>Quantity: {product.quantity}</h4>
+
+                <button onClick={() => decreaseQuantity(product._id)}>
+                  ➖
+                </button>
+
+                <button
+                  onClick={() => increaseQuantity(product._id)}
+                  style={{ margin: "0 10px" }}
+                >
+                  ➕
+                </button>
+
+                <br />
+                <br />
+
+                <button onClick={() => removeFromCart(product._id)}>
+                  Remove
+                </button>
+              </div>
+            );
+          })}
 
           <hr />
 
