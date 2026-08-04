@@ -115,4 +115,31 @@ function Checkout() {
         placeholder="Shipping Address"
         rows="4"
         value={address}
-        onChange={(e) => setAddress(e
+        onChange={(e) => setAddress(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "10px",
+          marginBottom: "20px",
+        }}
+      />
+
+      <button
+        onClick={handlePlaceOrder}
+        style={{
+          width: "100%",
+          padding: "12px",
+          backgroundColor: "#28a745",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
+      >
+        Place Order
+      </button>
+    </div>
+  );
+}
+
+export default Checkout;
