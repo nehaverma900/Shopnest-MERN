@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Register() {
   const navigate = useNavigate();
 
@@ -14,7 +17,7 @@ function Register() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           name,
           email,
@@ -30,9 +33,8 @@ function Register() {
 
       navigate("/login");
     } catch (error) {
-      alert(
-        error.response?.data?.message || "Registration Failed"
-      );
+      alert(error.response?.data?.message || "Registration Failed");
+      console.error(error);
     }
   };
 

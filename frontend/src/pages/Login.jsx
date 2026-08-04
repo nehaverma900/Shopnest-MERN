@@ -2,28 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+// 👇 Apna Render Backend URL
+const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
+
 function Login() {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        form
+        `${API_URL}/api/auth/login`,
+        {
+          email,
+          password,
+        }
       );
 
       localStorage.setItem("token", data.token);
@@ -33,11 +30,8 @@ function Login() {
 
       navigate("/");
     } catch (error) {
-      console.log(error);
-
-      alert(
-        error.response?.data?.message || "Login Failed"
-      );
+      alert(error.response?.data?.message || "Login Failed");
+      console.error(error);
     }
   };
 
@@ -53,10 +47,9 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          name="email"
           placeholder="Enter Email"
-          value={form.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
           style={{
             width: "100%",
@@ -67,10 +60,9 @@ function Login() {
 
         <input
           type="password"
-          name="password"
           placeholder="Enter Password"
-          value={form.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
           style={{
             width: "100%",
