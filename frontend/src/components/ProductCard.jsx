@@ -2,15 +2,12 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
-// 👇 Apna Render Backend URL
-const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
-
 function ProductCard({ product }) {
   const { addToCart } = useContext(CartContext);
 
   const image =
     product.images && product.images.length > 0
-      ? `${API_URL}${product.images[0].url}`
+      ? product.images[0].url
       : "https://via.placeholder.com/200";
 
   return (
