@@ -29,7 +29,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <h2>ShopNeste</h2>
+        <h2>ShopNest</h2>
       </div>
 
       <ul className="nav-links">
@@ -78,4 +78,4 @@ function Navbar() {
   );
 }
 
-export default Nav
+export default Navbar;
