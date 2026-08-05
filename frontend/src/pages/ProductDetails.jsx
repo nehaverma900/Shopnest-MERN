@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-// 👇 Apna Render Backend URL
 const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
 
 function ProductDetails() {
@@ -32,7 +31,7 @@ function ProductDetails() {
 
   const image =
     product.images && product.images.length > 0
-      ? `${API_URL}${product.images[0].url}`
+      ? product.images[0].url
       : "https://via.placeholder.com/350";
 
   return (
@@ -52,13 +51,9 @@ function ProductDetails() {
 
       <p>{product.description}</p>
 
-      <p>
-        <b>Category:</b> {product.category}
-      </p>
+      <p><b>Category:</b> {product.category}</p>
 
-      <p>
-        <b>Stock:</b> {product.stock}
-      </p>
+      <p><b>Stock:</b> {product.stock}</p>
 
       <button>Add To Cart</button>
     </div>
