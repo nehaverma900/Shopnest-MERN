@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
-const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
-
 function Cart() {
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ function Cart() {
           {cart.map((product) => {
             const image =
               product.images?.length > 0
-                ? `${API_URL}${product.images[0].url}`
+                ? product.images[0].url
                 : "https://via.placeholder.com/120";
 
             return (
@@ -48,6 +46,10 @@ function Cart() {
                   alt={product.name}
                   width="120"
                   height="120"
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
                 />
 
                 <h3>{product.name}</h3>
