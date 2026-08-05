@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-// 👇 Apna Render Backend URL
 const API_URL = "https://shopnest-mern-3-v5io.onrender.com";
 
 function AdminOrders() {
@@ -90,9 +89,9 @@ function AdminOrders() {
             key={order._id}
             style={{
               border: "1px solid #ccc",
-              padding: "15px",
+              padding: "20px",
               marginBottom: "20px",
-              borderRadius: "8px",
+              borderRadius: "10px",
             }}
           >
             <h3>User Details</h3>
@@ -102,13 +101,39 @@ function AdminOrders() {
             <p><strong>Total Price:</strong> ₹{order.totalPrice}</p>
             <p><strong>Status:</strong> {order.orderStatus}</p>
 
-            <h4>Products</h4>
+            <h3>Products</h3>
 
             {order.orderItems.map((item, index) => (
-              <div key={index}>
-                <p>
-                  {item.product?.name} × {item.quantity}
-                </p>
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                  borderBottom: "1px solid #ddd",
+                  padding: "10px 0",
+                }}
+              >
+                <img
+                  src={
+                    item.product?.images?.length > 0
+                      ? item.product.images[0].url
+                      : "https://via.placeholder.com/100"
+                  }
+                  alt={item.product?.name}
+                  width="100"
+                  height="100"
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
+                />
+
+                <div>
+                  <h4>{item.product?.name}</h4>
+                  <p>Price: ₹{item.product?.price}</p>
+                  <p>Quantity: {item.quantity}</p>
+                </div>
               </div>
             ))}
 
@@ -120,9 +145,9 @@ function AdminOrders() {
                 updateStatus(order._id, e.target.value)
               }
             >
-              <option>Processing</option>
-              <option>Shipped</option>
-              <option>Delivered</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
             </select>
 
             <button
@@ -134,6 +159,7 @@ function AdminOrders() {
                 border: "none",
                 padding: "8px 15px",
                 cursor: "pointer",
+                borderRadius: "5px",
               }}
             >
               Delete
@@ -146,4 +172,3 @@ function AdminOrders() {
 }
 
 export default AdminOrders;
-
